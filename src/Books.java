@@ -90,6 +90,11 @@ public class Books {
         type.setAttribute("quantity", type01);
         rootElement.appendChild(type);
 
+
+
+
+
+
 // сюда записать файлы.....
 
 
