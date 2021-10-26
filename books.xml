@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BookCatalogue>
+    <Book id="1">
+        <Title>1984</Title>
+        <Author>Джордж Оруэлл</Author>
+        <Pages>320</Pages>
+        <Type>Худ.лит.</Type>
+        <Cost currency="BYN">17</Cost>
+    </Book>
+    <Book id="2">
+        <Title>Стив Джобс</Title>
+        <Author>Уолтер Айзексон</Author>
+        <Pages>688</Pages>
+        <Type>Худ.лит.</Type>
+        <Cost currency="BYN">45</Cost>
+    </Book>
+    <Book id="3">
+        <Title>Java. Руководство для начинающих</Title>
+        <Author>Герберт Шилдт</Author>
+        <Pages>816</Pages>
+        <Type>Науч.лит.</Type>
+        <Cost currency="BYN">120</Cost>
+    </Book>
+</BookCatalogue>
