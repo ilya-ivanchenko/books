@@ -2,23 +2,23 @@
 <BookCatalogue>
     <Book id="1">
         <Title>1984</Title>
-        <Author>Джордж Оруэлл</Author>
+        <Author>George Orwell</Author>
         <Pages>320</Pages>
-        <Type>Худ.лит.</Type>
+        <Type>Art lit.</Type>
         <Cost currency="BYN">17</Cost>
     </Book>
     <Book id="2">
-        <Title>Стив Джобс</Title>
-        <Author>Уолтер Айзексон</Author>
+        <Title>Steve Jobs</Title>
+        <Author>Walter Isaacson </Author>
         <Pages>688</Pages>
-        <Type>Худ.лит.</Type>
+        <Type>Art lit.</Type>
         <Cost currency="BYN">45</Cost>
     </Book>
     <Book id="3">
-        <Title>Java. Руководство для начинающих</Title>
-        <Author>Герберт Шилдт</Author>
+        <Title>Java. A beginner's guide </Title>
+        <Author>Herbert Schildt </Author>
         <Pages>816</Pages>
-        <Type>Науч.лит.</Type>
+        <Type>Science lit.</Type>
         <Cost currency="BYN">120</Cost>
     </Book>
 </BookCatalogue>

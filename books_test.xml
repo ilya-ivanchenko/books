@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Books>
-    <Type quantity="1">Науч.лит.</Type>
-</Books>
+<books>
+    <pages quantity="1824">Total pages</pages>
+    <type quantity="1">Science lit.</type>
+    <type quantity="2">Art lit.</type>
+</books>

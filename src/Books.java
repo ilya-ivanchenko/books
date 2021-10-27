@@ -1,4 +1,4 @@
-//package
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,40 +26,40 @@ import java.io.*;
 public class Books {
     public static void main(String[] args) throws SAXException, IOException, TransformerException, ParserConfigurationException {
 
-        DocumentBuilderFactory books = DocumentBuilderFactory.newInstance();  //созд. построителя
+        DocumentBuilderFactory books = DocumentBuilderFactory.newInstance();                                            //create builder
         DocumentBuilder b = books.newDocumentBuilder();
 
         int totalPage = 0;
         int type1 = 0;
         int type2 = 0;
         try {
-            Document doc = b.parse("books.xml");         //парсинг файла, получение стр-ры документа из файла XML
-            doc.getDocumentElement().normalize();    //опция
-            Element eroot = doc.getDocumentElement();   // получение  root-элемента XML-файла
+            Document doc = b.parse("books.xml");                                                                    //parse file, get structure  of document from XML
+            doc.getDocumentElement().normalize();                                                                       //normalize node
+            Element eroot = doc.getDocumentElement();                                                                   //get root element  from XML
             System.out.println("Root Element: " + eroot.getNodeName());
-            NodeList list = eroot.getChildNodes();  // просмтриваем подэлементы root-элемента
+            NodeList list = eroot.getChildNodes();                                                                      //see subitem  of root element
             for (int i = 0; i < list.getLength(); i++) {
-                Node book = list.item(i);             //проверяем все элементы
-                if (book.getNodeType() == Node.ELEMENT_NODE) {    // если тип ноды  - элемент, то получаем элементы
-                    Element element = (Element) book;    //
-                    String id = element.getAttribute("id");    // получаем аттрибут id
+                Node book = list.item(i);                                                                               //check all elements
+                if (book.getNodeType() == Node.ELEMENT_NODE) {                                                          //if types of node is element, get element
+                    Element element = (Element) book;
+                    String id = element.getAttribute("id");                                                       //get attribute "id"
                     String title = element.getElementsByTagName("Title").item(0).getTextContent();
                     String author = element.getElementsByTagName("Author").item(0).getTextContent();
                     String pages = element.getElementsByTagName("Pages").item(0).getTextContent();
                     String type = element.getElementsByTagName("Type").item(0).getTextContent();
-                    totalPage += Integer.valueOf(pages); // подсчет общего кол-ва страниц, перевод в Integer
+                    totalPage += Integer.valueOf(pages);                                                                //total page count, convert to Integer (object)
 
                     NodeList costlist = element.getElementsByTagName("Cost");
                     String cost = costlist.item(0).getTextContent();
 
-                    String currency = costlist.item(0).getAttributes().getNamedItem("currency").getTextContent();
+                    String currency = costlist.item(0).getAttributes().getNamedItem("currency").getTextContent();  //get attribute
 
-                    if (element.getElementsByTagName("Type").item(0).getTextContent().equals("Науч.лит.")) //сравнение последовательности символов в строке
+                    if (element.getElementsByTagName("Type").item(0).getTextContent().equals("Science lit."))      //comparison of a sequence of characters
                         type1 += 1;
-                    else if (element.getElementsByTagName("Type").item(0).getTextContent().equals("Худ.лит."))
+                    else if (element.getElementsByTagName("Type").item(0).getTextContent().equals("Art lit."))
                         type2 += 1;
                     else
-                        System.out.println("Книга неизвеcтного Type");
+                        System.out.println("Unknown type");
 
                     System.out.println("Current Element: " + book.getNodeName());
                     System.out.println("Position: " + id);
@@ -71,61 +71,54 @@ public class Books {
                 }
             }
             System.out.println("Total: " + totalPage + " pages");
-            System.out.println("Total books 'Науч. лит.' : " + type1 + " шт.");
-            System.out.println("Total books 'Худ.лит.' : " + type2 + " шт.");
-        } catch (SAXException | IOException e) {
+            System.out.println("Total books 'Science lit.' : " + type1 + " шт.");
+            System.out.println("Total books 'Art lit.' : " + type2 + " шт.");
+        } catch (SAXException | IOException e) {                                                                        //catch an exception
             e.printStackTrace();
         }
-//запись
-        DocumentBuilderFactory xml = DocumentBuilderFactory.newInstance();  //созд. построителя
+                                                                                                                        //write new XML
+        DocumentBuilderFactory xml = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = xml.newDocumentBuilder();
         Document task = docBuilder.newDocument();
-// сюда записать файлы.....
-        Element rootElement = task.createElement("Books");
+        Element rootElement = task.createElement("books");                                                      //create root element
         task.appendChild(rootElement);
 
-        Element type = task.createElement("Type");
-        type.setTextContent("Науч.лит.");
-        String type01 = Integer.toString(type1); // преобразование int в String
-        type.setAttribute("quantity", type01);
-        rootElement.appendChild(type);
+        Element totalpages = task.createElement("pages");                                                       //create element "pages"
+        totalpages.setTextContent("Total pages");
+        String totalP = Integer.toString(totalPage);                                                                    //convert to String
+        totalpages.setAttribute("quantity", totalP);                                                              //set name and value of attribute
+        rootElement.appendChild(totalpages);                                                                            //add child element
 
+        Element typeS = task.createElement("type");
+        typeS.setTextContent("Science lit.");
+        String type01 = Integer.toString(type1);
+        typeS.setAttribute("quantity", type01);
+        rootElement.appendChild(typeS);
 
-
-
-
-
-// сюда записать файлы.....
-
-
-
-
-
-
-
-
-
-
-
-      try (FileOutputStream output = new FileOutputStream("G:\\ПРОГА\\IdeaProjects\\test\\books_test.xml")) {
-            writeXml(task, output); // output или System.out -  тогда в консоль запись
-          output.close();
+        Element typeA = task.createElement("type");
+        typeA.setTextContent("Art lit.");
+        String type02 = Integer.toString(type2);
+        typeA.setAttribute("quantity", type02);
+        rootElement.appendChild(typeA);
+                                                                                                                        //TODO  add files for output
+      try (FileOutputStream output = new FileOutputStream("G:\\ПРОГА\\IdeaProjects\\test\\books_test.xml")) {     //open output flow,write document "task" to file
+            writeXml(task, output);
+          output.close();                                                                                               //close flow
         }
-      catch (IOException e) {
-            e.printStackTrace();
+      catch (IOException e) {                                                                                           //catch an exception
+            System.out.println("Error writing file");
         }
     }
 
     private static void writeXml(Document task, OutputStream output)
             throws TransformerException {
 
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();   //созд. трансформер
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();                                       //create transformer, converting
         Transformer transformer = transformerFactory.newTransformer();
 
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");  //красивая печать
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");                                                   //pretty print
         DOMSource source = new DOMSource(task);
         StreamResult result = new StreamResult(output);
-
         transformer.transform(source, result);
     }
 }
